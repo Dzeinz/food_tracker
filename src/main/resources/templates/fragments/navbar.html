@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="navbar">
+
+<nav class="navbar navbar-dark bg-dark mb-2">
+    <a class="navbar-brand" href="/">
+        <img th:src="@{/img/food.png}" width="30" height="30" class="d-inline-block align-top" alt="">
+        Food Tracker
+    </a>
+
+    <div class="nav-item">
+        <a class="nav-link text-white" href="/cart">
+            <i class="fas fa-shopping-cart cartIcon">
+            </i>
+            <span th:if="${not #lists.isEmpty(cart.ingredients)}" th:text="${cart.ingredients.size()}">1</span>
+        </a>
+    </div>
+</nav>
+
+</body>
+
+</html>
