@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -48,5 +51,22 @@ public class WebController {
     public String getCart(Model model){
         model.addAttribute("cart",cart);
         return "cart";
+    }
+
+    @PostMapping(value="/cart")
+    public String addToCart (
+            @ModelAttribute Ingredient ingredient,
+            HttpServletRequest request,
+            Model model
+    ) {
+        try {
+            cartService.addToCart(cart, ingredient);
+        } catch (Exception e) {
+            model.addAttribute("cart",cart);
+            model.addAttribute("ingredient",ingredient);
+            return "unavailable";
+        }
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 }
