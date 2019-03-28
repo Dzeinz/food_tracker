@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+</head>
+<body>
+
+<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <h1>Your Cart</h1>
+        <p th:if="${cart.id == null}">Your cart is currently empty.</p>
+
+        <table class="table table-striped" th:if="${cart.id != null}">
+            <thead class="bg-primary text-white">
+            <tr>
+                <td>Ingredient Name</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ingredient : ${cart.ingredients}">
+                <td th:text="${ingredient.name}">Ingredient Name</td>
+            </tr>
+            </tbody>
+            <tfoot class="bg-primary text-white">
+            <tr>
+                <td th:text="'Total Calories (kCal):' + ${cart.totalCalories()}">Total</td>
+            </tr>
+            </tfoot>
+    </div>
+</div>
+
+</body>
+</html>
