@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class WebController {
     @Autowired
     private CartService cartService;
 
-    @RequestMapping(value = {"","/","/index"})
+    @GetMapping(value = {"","/","/index"})
     public String getList (
             @RequestParam(value="search", required = false) String search,
             Model model) {
@@ -42,5 +42,11 @@ public class WebController {
         }
 
         return "list";
+    }
+
+    @GetMapping(value="/cart")
+    public String getCart(Model model){
+        model.addAttribute("cart",cart);
+        return "cart";
     }
 }
