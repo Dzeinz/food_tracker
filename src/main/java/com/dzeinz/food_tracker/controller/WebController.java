@@ -41,7 +41,7 @@ public class WebController {
             model.addAttribute("cart",cart);
 
         } catch (Exception e ) {
-            return "error";
+            return "redirect:error";
         }
 
         return "list";
@@ -68,5 +68,11 @@ public class WebController {
         }
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
+    }
+
+    @GetMapping(value="error")
+    public String error(Model model){
+        model.addAttribute("cart",cart);
+        return "error";
     }
 }

@@ -13,7 +13,7 @@
         <a class="nav-link text-white" href="/cart">
             <i class="fas fa-shopping-cart cartIcon">
             </i>
-            <span th:if="${not #lists.isEmpty(cart.ingredients)}" th:text="${cart.ingredients.size()}">1</span>
+            <span th:if="${not #lists.isEmpty(cart?.ingredients)}" th:text="${cart.ingredients.size()}">1</span>
         </a>
     </div>
 </nav>

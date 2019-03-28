@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header :: head"></th:block>
+</head>
+<body>
+
+<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <h1>An Error Occured</h1>
+        <p>We're sorry.  An error occured while trying to retrieve food information.  Please try again or contact us if
+        you continue to receive this message.</p>
+        <button class="btn btn-primary" onclick='javascript:window.history.back()'>Back</button>
+    </div>
+</div>
+
+</body>
+</html>
