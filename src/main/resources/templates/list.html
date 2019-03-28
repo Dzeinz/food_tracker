@@ -5,5 +5,57 @@
 </head>
 <body>
 
+<th:block th:include="fragments/navbar :: navbar"></th:block>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1 mb-1">
+        <h1>Welcome to the Food Tracker.</h1>
+        <p>This tool allows you to search for foods, add selections to a cart and view the total caloric content of the
+            cart items.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-md-7 col-md-4">
+        <form th:action="@{/}" th:object="${object}">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search...">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-md-1 col-md-10">
+        <table class="table table-striped">
+            <thead class="bg-primary text-white">
+            <tr>
+                <td>Name</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${ingredients == null}">
+                <td th:text="'No results found for search: ' + ${search}"></td>
+                <td></td>
+            </tr>
+            <tr th:each="ingredient : ${ingredients}">
+                <td th:text="${ingredient.name}">Ingredient name</td>
+                <td>
+                    <form action="cart" method="post">
+                        <input type="hidden" name="externalId" th:value="${ingredient.externalId}" />
+                        <input type="hidden" name="name" th:value="${ingredient.name}" />
+                        <button class="btn-primary" onclick="submit">Add To Cart</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>
